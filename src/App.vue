@@ -5,6 +5,7 @@
       <button @click="setCell(2)">Start</button>
       <button @click="setCell(3)">Wall</button>
       <button @click="setCell(4)">End</button>
+      <button @click="bfs(startingCell[0], startingCell[1])">bfs</button>
       <button @click="reset()">Reset</button>
     </div>
     <div
@@ -30,8 +31,8 @@
   export default {
     data() {
       return {
-        ROWS: 35,
-        COLS: 75,
+        ROWS: 25,
+        COLS: 25,
         gridArr: [],
         startingCell: [null, null],
         endingCell: [null, null],
@@ -108,6 +109,36 @@
       },
       reset() {
         this.createGridArray();
+      },
+      wait(timeout) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, timeout);
+        })
+      },
+      async bfs(i, j) {
+        const DIRECTIONS = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+        const visited = new Set();
+        const q = [[i, j]];
+        while (q.length > 0) {
+          let [row, col] = q.shift();
+          for (let [rd, cd] of DIRECTIONS) {
+            let [newR, newC] = [row + rd, col + cd];
+            if (newR < this.ROWS && newR >= 0 &&
+                newC < this.COLS && newC >= 0) {
+                  if (this.gridArr[newR][newC] === 4) {
+                    alert('Done');
+                    return;
+                  }
+                  if (this.gridArr[newR][newC] === 0) {
+                    await this.wait(35);
+                    this.gridArr[newR][newC] = 1;
+                    q.push([newR, newC]);
+                  }
+              }
+          }
+        }
       }
     }
   };
