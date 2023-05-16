@@ -5,6 +5,7 @@
       <button @click="setCell(2)">Start</button>
       <button @click="setCell(3)">Wall</button>
       <button @click="setCell(4)">End</button>
+      <button @click="reset()">Reset</button>
     </div>
     <div
       class="grid"
@@ -29,7 +30,7 @@
   export default {
     data() {
       return {
-        ROWS: 30,
+        ROWS: 40,
         COLS: 75,
         gridArr: [],
         cell: 0,
@@ -70,6 +71,9 @@
       },
       setIsMouseDown(value) {
         this.isMouseDown = value;
+      },
+      reset() {
+        this.createGridArray();
       }
     }
   };
