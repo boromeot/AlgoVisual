@@ -30,11 +30,11 @@
   export default {
     data() {
       return {
-        ROWS: 16,
-        COLS: 16,
+        ROWS: 35,
+        COLS: 75,
         gridArr: [],
         startingCell: [null, null],
-        endinigCell: [null, null],
+        endingCell: [null, null],
         cell: 0,
         isMouseDown: false,
         map: {
@@ -68,16 +68,14 @@
         }
         if (this.cell === 4) {
             // Check if there is already a start cell
-            const [startX, startY] = this.endinigCell;
+            const [startX, startY] = this.endingCell;
             if (startX !== null && startY !== null) {
               // Remove the existing start cell before setting a new one
               this.gridArr[startX][startY] = 0;
             }
-            this.endinigCell = [i, j];
+            this.endingCell = [i, j];
           }
-        const newGrid = [...this.gridArr];
-        newGrid[i][j] = this.cell;
-        this.gridArr = newGrid;
+        this.gridArr[i][j] = this.cell;
       },
       handleMouseOver(i, j) {
         if (this.isMouseDown) {
@@ -92,16 +90,14 @@
           }
           if (this.cell === 4) {
             // Check if there is already a start cell
-            const [startX, startY] = this.endinigCell;
+            const [startX, startY] = this.endingCell;
             if (startX !== null && startY !== null) {
               // Remove the existing start cell before setting a new one
               this.gridArr[startX][startY] = 0;
             }
-            this.endinigCell = [i, j];
+            this.endingCell = [i, j];
           }
-          const newGrid = [...this.gridArr];
-          newGrid[i][j] = this.cell;
-          this.gridArr = newGrid;
+          this.gridArr[i][j] = this.cell;
         }
       },
       setCell(value) {
