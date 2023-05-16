@@ -1,4 +1,4 @@
-<template>
+<template class="">
   <div>
     <div>
       <button @click="setCell(0)">Unsearched</button>
