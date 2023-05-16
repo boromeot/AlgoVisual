@@ -66,6 +66,15 @@
           }
           this.startingCell = [i, j];
         }
+        if (this.cell === 4) {
+            // Check if there is already a start cell
+            const [startX, startY] = this.endinigCell;
+            if (startX !== null && startY !== null) {
+              // Remove the existing start cell before setting a new one
+              this.gridArr[startX][startY] = 0;
+            }
+            this.endinigCell = [i, j];
+          }
         const newGrid = [...this.gridArr];
         newGrid[i][j] = this.cell;
         this.gridArr = newGrid;
@@ -80,6 +89,15 @@
               this.gridArr[startX][startY] = 0;
             }
             this.startingCell = [i, j];
+          }
+          if (this.cell === 4) {
+            // Check if there is already a start cell
+            const [startX, startY] = this.endinigCell;
+            if (startX !== null && startY !== null) {
+              // Remove the existing start cell before setting a new one
+              this.gridArr[startX][startY] = 0;
+            }
+            this.endinigCell = [i, j];
           }
           const newGrid = [...this.gridArr];
           newGrid[i][j] = this.cell;
