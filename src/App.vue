@@ -30,9 +30,11 @@
   export default {
     data() {
       return {
-        ROWS: 40,
-        COLS: 75,
+        ROWS: 16,
+        COLS: 16,
         gridArr: [],
+        startingCell: [null, null],
+        endinigCell: [null, null],
         cell: 0,
         isMouseDown: false,
         map: {
@@ -55,12 +57,30 @@
         this.gridArr = tempArr;
       },
       handleClick(i, j) {
+        if (this.cell === 2) {
+          // Check if there is already a start cell
+          const [startX, startY] = this.startingCell;
+          if (startX !== null && startY !== null) {
+            // Remove the existing start cell before setting a new one
+            this.gridArr[startX][startY] = 0;
+          }
+          this.startingCell = [i, j];
+        }
         const newGrid = [...this.gridArr];
         newGrid[i][j] = this.cell;
         this.gridArr = newGrid;
       },
       handleMouseOver(i, j) {
         if (this.isMouseDown) {
+          if (this.cell === 2) {
+            // Check if there is already a start cell
+            const [startX, startY] = this.startingCell;
+            if (startX !== null && startY !== null) {
+              // Remove the existing start cell before setting a new one
+              this.gridArr[startX][startY] = 0;
+            }
+            this.startingCell = [i, j];
+          }
           const newGrid = [...this.gridArr];
           newGrid[i][j] = this.cell;
           this.gridArr = newGrid;
