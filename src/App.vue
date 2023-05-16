@@ -82,6 +82,7 @@
     border: 1px solid #ccc;
   }
   .grid {
+    user-select: none;
     display: flex;
     flex-wrap: wrap;
   }
