@@ -52,6 +52,24 @@
           .fill(null)
           .map(() => Array(this.ROWS).fill(0));
         this.gridArr = tempArr;
+      },
+      handleClick(i, j) {
+        const newGrid = [...this.gridArr];
+        newGrid[i][j] = this.cell;
+        this.gridArr = newGrid;
+      },
+      handleMouseOver(i, j) {
+        if (this.isMouseDown) {
+          const newGrid = [...this.gridArr];
+          newGrid[i][j] = this.cell;
+          this.gridArr = newGrid;
+        }
+      },
+      setCell(value) {
+        this.cell = value;
+      },
+      setIsMouseDown(value) {
+        this.isMouseDown = value;
       }
     }
   };
