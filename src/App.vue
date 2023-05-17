@@ -6,6 +6,7 @@
       <button @click="setCell(3)">Wall</button>
       <button @click="setCell(4)">End</button>
       <button @click="bfs(startingCell[0], startingCell[1])">bfs</button>
+      <button @click="dfs(startingCell[0], startingCell[1])">dfs</button>
       <button @click="reset()">Reset</button>
     </div>
     <div
@@ -132,14 +133,37 @@
                     return;
                   }
                   if (this.gridArr[newR][newC] === 0) {
-                    await this.wait(35);
+                    await this.wait(25);
                     this.gridArr[newR][newC] = 1;
                     q.push([newR, newC]);
                   }
               }
           }
         }
-      }
+      },
+      async dfs(i, j) {
+        const DIRECTIONS = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+        const visited = new Set();
+        const q = [[i, j]];
+        while (q.length > 0) {
+          let [row, col] = q.pop();
+          for (let [rd, cd] of DIRECTIONS) {
+            let [newR, newC] = [row + rd, col + cd];
+            if (newR < this.ROWS && newR >= 0 &&
+                newC < this.COLS && newC >= 0) {
+                  if (this.gridArr[newR][newC] === 4) {
+                    alert('Done');
+                    return;
+                  }
+                  if (this.gridArr[newR][newC] === 0) {
+                    await this.wait(25);
+                    this.gridArr[newR][newC] = 1;
+                    q.push([newR, newC]);
+                  }
+              }
+          }
+        }
+      },
     }
   };
 </script>
