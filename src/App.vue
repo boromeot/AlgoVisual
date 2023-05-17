@@ -5,8 +5,9 @@
       <button @click="setCell(2)">Start</button>
       <button @click="setCell(3)">Wall</button>
       <button @click="setCell(4)">End</button>
-      <button @click="bfs(startingCell[0], startingCell[1])">bfs</button>
-      <button @click="dfs(startingCell[0], startingCell[1])">dfs</button>
+      <button @click="bfs(startingCell[0], startingCell[1])">BFS</button>
+      <button @click="dfs(startingCell[0], startingCell[1])">DFS</button>
+      <button @click="removeSearched(startingCell[0], startingCell[1])">Remove Searched</button>
       <button @click="reset()">Reset</button>
     </div>
     <div
@@ -32,8 +33,8 @@
   export default {
     data() {
       return {
-        ROWS: 25,
-        COLS: 25,
+        ROWS: 30,
+        COLS: 30,
         gridArr: [],
         startingCell: [null, null],
         endingCell: [null, null],
@@ -111,7 +112,14 @@
       reset() {
         this.createGridArray();
       },
-      wait(timeout) {
+      removeSearched() {
+        for (let i = 0; i < this.ROWS; i++) {
+          for (let j = 0; j < this.COLS; j++) {
+            if (this.gridArr[i][j] === 1) this.gridArr[i][j] = 0;
+          }
+        }
+      },
+      wait(timeout = 18) {
         return new Promise((resolve) => {
           setTimeout(() => {
             resolve();
@@ -133,7 +141,7 @@
                     return;
                   }
                   if (this.gridArr[newR][newC] === 0) {
-                    await this.wait(25);
+                    await this.wait();
                     this.gridArr[newR][newC] = 1;
                     q.push([newR, newC]);
                   }
@@ -156,7 +164,7 @@
                     return;
                   }
                   if (this.gridArr[newR][newC] === 0) {
-                    await this.wait(25);
+                    await this.wait();
                     this.gridArr[newR][newC] = 1;
                     q.push([newR, newC]);
                   }
@@ -170,8 +178,8 @@
 
 <style>
   .cell {
-    width: 15px;
-    height: 15px;
+    width: 25px;
+    height: 25px;
     border: 1px solid #ccc;
   }
   .grid {
