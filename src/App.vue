@@ -128,7 +128,6 @@
       },
       async bfs(i, j) {
         const DIRECTIONS = [[0, 1], [0, -1], [1, 0], [-1, 0]];
-        const visited = new Set();
         const q = [[i, j]];
         while (q.length > 0) {
           let [row, col] = q.shift();
@@ -151,7 +150,6 @@
       },
       async dfs(i, j) {
         const DIRECTIONS = [[1, 0], [0, 1], [-1, 0], [0, -1]];
-        const visited = new Set();
         const q = [[i, j]];
         while (q.length > 0) {
           let [row, col] = q.pop();
