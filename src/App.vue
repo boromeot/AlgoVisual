@@ -7,6 +7,7 @@
       <button @click="setCell(4)">End</button>
       <button @click="bfs(startingCell[0], startingCell[1])">BFS</button>
       <button @click="dfs(startingCell[0], startingCell[1])">DFS</button>
+      <button @click="">Dijkstras</button>
       <button @click="removeSearched(startingCell[0], startingCell[1])">Remove Searched</button>
       <button @click="reset()">Reset</button>
     </div>
